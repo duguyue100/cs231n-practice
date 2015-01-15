@@ -9,6 +9,16 @@ import numpy as np;
 import matplotlib.pyplot as plt;
 
 from cs231nlib.classifier import NearestNeighbor;
+from cs231nlib.utils import load_CIFAR10;
+
+## load dataset
+
+Xtr, Ytr, Xte, Yte=load_CIFAR10("data/CIFAR10");
+
+print Xtr.shape[0];
+print Xtr.shape[1];
+print Xtr.shape[2];
+print Xtr.shape[3];
 
 ## Testing for Nearest Neighbor Function
 
