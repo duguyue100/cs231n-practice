@@ -8,6 +8,7 @@ Created on Jan 15, 2015
 import os;
 import cPickle as pickle;
 import numpy as np;
+import matplotlib.pyplot as plt;
 
 def load_CIFAR_batch(filename):
     """
@@ -59,3 +60,58 @@ def load_CIFAR10(ROOT):
     Xte, Yte=load_CIFAR_batch(os.path.join(ROOT, "test_batch"));
     
     return Xtr, Ytr, Xte, Yte;
+
+def visualize_CIFAR(X_train,
+                    y_train,
+                    samples_per_class):
+    """
+    A visualize function for CIFAR 
+    """
+    
+    classes = ['plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck'];
+    num_classes=len(classes);
+    
+    for y, cls in enumerate(classes):
+        idxs = np.flatnonzero(y_train == y)
+        idxs = np.random.choice(idxs, samples_per_class, replace=False)
+        for i, idx in enumerate(idxs):
+            plt_idx = i * num_classes + y + 1
+            plt.subplot(samples_per_class, num_classes, plt_idx)
+            plt.imshow(X_train[idx].astype('uint8'))
+            plt.axis('off')
+            if i == 0:
+                plt.title(cls)
+    
+    plt.show();
+    
+def time_function(f, *args):
+    """
+    Calculate time cost of a function
+    
+    @param f: a function
+    @param *args: respective parameters
+    
+    @return: total time the function costs 
+    """
+    
+    import time;
+    tic=time.time();
+    f(*args);
+    toc=time.time();
+    
+    return toc-tic;
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
